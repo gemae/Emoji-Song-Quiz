@@ -3090,7 +3090,7 @@ var count = function count() {
         this.showHint();
         this.score(5);
       } else {
-        alert("All hints are use!");
+        alert("No Hints Left!");
       }
     },
     // randomNum() {
