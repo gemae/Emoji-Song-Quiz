@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Red+Hat+Display:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.1.0-10/css/fontawesome.css" integrity="sha512-U5YsZ0sVOgewwu1iC4vjCSL8U+u+Xak94KIrjnLV97mo701iGHuw3h7ggMUgsAx5f3RJmNB4thOk78etZnksDQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.3/howler.min.js" integrity="sha512-6+YN/9o9BWrk6wSfGxQGpt3EUK6XeHi6yeHV+TYD2GR0Sj/cggRpXr1BrAQf0as6XslxomMUxXp2vIl+fv0QRA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script defer src="./dist/app.js"></script>
+</head>
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Red+Hat+Display:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+    body{
+        margin: 0;
+        font-family: 'Red Hat Display', sans-serif;
+    }
+    .container{
+        display: flex;
+        height: 100%;
+    }
+    .score_container{
+        width: 360px;
+        background: #FFB200;
+        height: 100vh;
+        position: relative;
+        box-sizing: border-box;
+        border-bottom-right-radius: 5px;
+        border-top-right-radius: 5px;
+    }
+    .add_player{
+        position: absolute;
+        bottom: 0;
+        /* padding: 30px; */
+        background: #277BC0;
+        width: 100%;
+        box-sizing: border-box;
+        text-align: center;
+        border-top-left-radius: 5px;
+        border-top-right-radius: 5px;
+    }
+    .add_player button{
+        background: #FFCB42;
+        width: 90%;
+        margin-bottom: 10px;
+        border-radius: 20px;
+        color: #277BC0;
+    }
+    .add_player input {
+        font-size: 16px;
+        padding: 10px;
+        margin: 20px 0;
+        border: none;
+        border:1px solid #277BC0;
+        border-radius: 5px;
+    
+    }
+    .player_wrap{
+        width: 100%;
+        padding: 20px;
+        box-sizing: border-box;
+        max-height: 80%;
+        overflow: scroll;
+    }
+    .player_cont {
+        position: relative;
+        margin: 10px;
+        border-radius: 10px;
+        border: 1px solid #FFF4CF;
+        background: #277BC0;
+    }
+    .player_cont li {
+        padding: 10px;
+        cursor: pointer;
+        color: #fff;
+    }
+    .player_cont span{
+        position: absolute;
+        top: -15px;
+        right: -15px;
+        border-radius: 50%;
+        background: #FFF4CF;
+        width: 25px;
+        height: 25px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: #277BC0;
+        text-shadow: 2px 2px 2px #FFB200;
+        border: 1px solid #FFCB42;
+        font-size: 13px;
+        box-shadow: 2px 2px 5px #aaaaaa;
+        background: linear-gradient(-45deg, #FFB200, #FFCB42, #FFF4CF);
+        font-weight: bold;
+    }
+    .main {
+        text-align: center;
+        position: relative;
+        width: 100%;
+        height: 100vh;
+        background:#277BC0;
+        border: 5px solid #FFF4CF;
+        border-radius: 20px;
+        box-sizing: border-box;
+    }
+    ul {
+        list-style-type: none;
+    }
+    .emoji_wrap {
+        display:flex;
+        justify-content: space-around;
+        width: 500px;
+        max-width: 100%;
+        margin: auto;
+        padding: 0;
+        padding-top: 20px;
+    }
+    .round {
+        text-align: center;
+        font-size: 35px;
+        width: 120px;
+        margin: auto;
+        padding: 10px;
+        border-bottom-left-radius: 40px;
+        border-bottom-right-radius: 40px;
+        background: #FFF4CF;
+    }
+    .round span:first-child{
+        padding: 0 5px;
+    }
+    .round span {
+        font-weight: bold;
+        color: #FFB200;   
+    }
+    .emojis{
+        padding: 10px 30px;
+        background: rgba(255, 244, 207, 0.2);
+        border-radius: 20px;
+        border: 3px solid #277BC0;
+        margin: 20px 0;
+    }
+    .emoji_cont {
+        font-size: 110px;
+    }
+    .song_wrap {
+        text-align: center;
+        padding: 0;
+        margin:10px 15px;
+    }
+    .song_wrap .song_letter:before {
+        content: '';
+        position: absolute;
+        border-bottom: 5px solid #277BC0;
+        width: 100%;
+        height: 10px;
+        bottom: -5px;
+        left: 0;
+    }
+    .title_wrap {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-wrap: wrap;
+        margin: 0 0 30px 0;
+        min-height: 200px;
+    }
+    .song_letter {
+        display: inline-block;
+        position: relative;
+        margin: 0 5px;
+        border-radius: 5px;
+        font-size: 70px;
+        width: 70px;
+        max-height: 100px;
+        color: #FFF4CF;
+        font-weight: bolder;
+        text-transform: uppercase;
+        background: rgba(255, 244, 207, 0.2);
+        box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 12px 2px;
+    }
+    .song_letter li{
+        visibility: hidden;
+    }
+    .score {
+        position: absolute;
+        top: 20px;
+        left: 60px;
+        font-size: 60px;
+        margin: 0;
+        text-shadow: 2px 2px 2px #ccc;
+        font-weight: bold;
+        color: #FFB200;
+    }
+    .score small{
+        font-size: 14px;
+        text-shadow: none;
+        padding-left: 5px;
+    }
+    body {
+        position: relative;
+    }
+    .overLay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 9999;
+        background: rgba(0,0,0, .7);
+      
+    }
+    .overLay-main {
+        width: 90%;
+        height: 90%;
+        background: #FFB200;
+        opacity: 1;
+        color: #ffffff;
+        border-radius: 20px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        background: linear-gradient(-45deg, #FFB200, #FFCB42, #277BC0);
+        background-size: 300% 300%;
+        animation: gradient 05s ease infinite;
+    }
+    .overLay-main p {
+        font-size: 100px;
+        font-weight: bold;
+    }
+    .overLay-main span {
+        color: #277BC0;
+    }
+   button{
+       cursor: pointer;
+       outline: none;
+       border: none;
+       width: 150px;
+       height: 60px;
+   }
+   .tools{
+    position: absolute;
+    left: 50%;
+    bottom: 0;
+    transform: translateX(-50%);
+   }
+   .box-btn-answer{
+    padding: 20px;
+   }
+   .btn-answer{
+       background: #FFB200;
+       border: 2px solid #FFF4CF;
+       border-radius: 5px;
+       color: #277BC0;
+       margin-right: 20px;
+   }
+   .btn-hint{
+       background: #FFF4CF;
+       border: 2px solid #FFB200;
+       border-radius: 5px;
+       color: #277BC0;
+   }
+   .btn-next {
+       position: absolute;
+        bottom: 0;
+        right: 0;
+        border-radius: 5px;
+        font-size: 16px;
+        color: #FFF4CF;
+        background: #FFB200;
+   }
+    audio::-webkit-media-controls-panel {
+        background-color: #56AEFF;
+    }
+
+    audio::-webkit-media-controls-timeline {
+    background-color: #B1D4E0;
+    border-radius: 25px;
+    margin-left: 10px;
+    margin-right: 10px;
+    background: transparent;
+    }
+   .overLay-main button {
+       width: 200px;
+       height: 80px;
+       background: #277BC0;
+       color: #fff;
+       font-size: 20px;
+       border-radius: 20px;
+   }
+
+
+    @keyframes gradient {
+        0% {
+            background-position: 0% 50%;
+        }
+        50% {
+            background-position: 100% 50%;
+        }
+        100% {
+            background-position: 0% 50%;
+        }
+    }
+
+    .final-results {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 9999;
+        background: rgba(0,0,0, .7);
+        display: none;
+    }
+
+    .results-main {
+        width: 60%;
+        height: 60%;
+        background: #FFB200;
+        opacity: 1;
+        color: #ffffff;
+        border-radius: 20px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: row;
+        background: linear-gradient(-45deg, #277BC0,#FFB200 );
+        background-size: 300% 300%;
+        animation: gradient 15s ease infinite;
+        position: relative;
+    }
+    .winner-cont,.runnerup-cont {
+       text-align: center;
+       height: 500px;
+       width: 200px;
+       display: flex;
+       justify-content: center;
+       align-items: center;
+       flex-direction:column;
+  
+    }
+    .winner-name,.runnerup-name{
+        font-size: 40px;
+        font-weight: bold;
+        color: #FFF4CF;
+    }
+    .winner{
+        font-size:120px;
+        margin: 0;
+
+    }.runnerup{
+        font-size: 80px;
+        margin: 0;
+    }
+    .final-results h1{
+        position: absolute;
+        top: -20px;
+        text-transform: uppercase;
+        font-size: 50px;
+        color: #FFF4CF;
+        font-weight: bold;
+    }
+    .winner-point{ 
+        left: 70px;
+    }
+    .runnerup-point{
+        right: 70px;
+    }
+    .point{
+        position: absolute;
+        top: 50%;
+        transform: translateY(-100%);
+        font-size: 70px;
+        font-weight: bold;
+        border-radius: 100px;
+        padding: 20px;
+        background: #FFB200;
+        color: #277BC0;
+        border: 5px solid  #FFF4CF;
+        width: 100px;
+        text-align: center;
+    }
+    .point:before {
+        content: 'points';
+        font-size: 14px;
+        position: absolute;
+        bottom: 20px;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+    .btn-reset{
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        background: none;
+        outline: none;
+        color: #FFB200;
+        font-size: 24px;
+    }
+    .overLay > p{
+        color: #ffffff;
+        position: absolute;
+        bottom: 50px;
+    }
+</style>
+<body>
+    <div class="final-results" x-data="count()" @click= "$el.style.display='none'">
+        
+        <div class="results-main" >
+                <h1>Congratulations!</h1>
+                <p class="winner-point point"></p>
+            <div class="winner-cont">
+                <p class="winner-name"></p>
+                <p class="winner">🏆</p>
+
+            </div>
+            <div class="runnerup-cont">
+                <p class="runnerup-name"></p>
+                <p class="runnerup">🏅</p>
+            </div>
+            <p class="runnerup-point point"></p>
+        </div>
+    </div>
+    <div class="overLay" x-data ="{show: true}" x-show="show">
+        <div class="overLay-main">
+                <p>Emoji <span> Song </span>Quiz</p>
+                <button @click="show = !show">Play</button>
+        </div>
+       <p>by: gemae</p>
+    </div>
+    <div class="container" x-data = "{disabledScore: true,...count()}">
+        <div class="score_container"
+            x-data = "players()"
+        >
+            <ul class="player_wrap">
+                <template x-for = "player in getPlayers">
+                    <div class="player_cont">
+                        <li class="btn-player"
+                            x-text = "player.name"
+                            @click = "!disabledScore ? (saveScore(player.key,totalScore),disabledScore = !disabledScore) : ''"
+                        ></li>
+                        <span x-text ="player.score"></span>
+                    </div>
+                </template>
+            </ul>
+
+            <div class="add_player"
+                x-data="{name: ''}"
+            >
+                <input type="text" x-model = "name" @keydown.enter.prevent="$refs.saveplayer.click()">
+                <button @click = "(savePlayer({'key': (playerName ? playerName.length-0 : '0'), 'name': name,'score': 0}), name = '')";
+                        x-ref="saveplayer"
+                >ADD PLAYER</button>
+            </div>
+            
+        </div>
+
+        <div class="main">
+                <p class="round"><span x-text="!getCount ? 'Start' : getCount"></span><span x-text=`/${listLength}`></span></p>
+                
+                <!-- Score -->
+                <p class="score"><span x-text="score()"></span><small>points</small></p>
+
+                <!-- Timer -->
+                
+        
+                <ul class="emoji_wrap" x-data="getEmojis">
+                    <template x-for="emoji in getEmojis">
+                       <div class="emojis"><li class="emoji_cont" x-text="emoji"></li></div>
+                    </template>
+                </ul>
+                
+                <!-- <ul class="song_wrap" x-init="$nextTick(() => hints())">
+                    <template x-for="letter in getFullTitle">
+                                <li class="song_letter" 
+                                x-text="letter"
+                                :style = "letter == ' ' ? 'visibility: hidden' : ''"
+                                :class = "{'active' : letter != ' '}"
+                                ></li>
+                    </template>
+                </ul> -->
+                <div class="title_wrap" x-init="$nextTick(() => showHint())">
+                    <template x-for="titles in getTitle">
+                        <ul class="song_wrap" x-init="$nextTick(() => getTitle())">
+                            <template x-for="letter in titles">
+                                <div class="song_letter" 
+                                >
+                                <li x-text="letter"></li>
+                                </div>
+                                
+                            </template>
+                        </ul>
+                    </template>
+                </div>
+                
+                <div class="tools">
+                    <audio class="audio" controls x-bind:src="getSong"></audio>
+                
+                    <div class="box-btn-answer">
+                          
+                    <button class="btn-answer" @click = "(showAnswer(), disabledScore = false)">Answer</button>
+                            <button class="btn-hint" @click = "hints()">Hint</button>
+                    </div>
+                </div>
+               
+                <button class="btn-next" @click = "(addCount(), disabledScore = true)" disabled> NEXT</button>
+              <button class="btn-reset"
+                    @click="localStorage.removeItem('count');localStorage.removeItem('players');localStorage.removeItem('score');$nextTick(()=>location.reload())"
+              >
+                  Reset
+              </button>
+            </div>   
+    </div>
+    
+    <!-- <div id="clock" x-data="timerClock()">
+            <span id="seconds">10</span>
+            <button @click = "startHere()">Start Timer</button>
+    </div> -->
+</body>
+</html>

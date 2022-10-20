@@ -1,0 +1,21 @@
+{
+  "name": "ttis-quiz",
+  "version": "1.0.0",
+  "description": "Quiz app",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "test"
+  ],
+  "author": "ME",
+  "license": "ISC",
+  "dependencies": {
+    "alpinejs": "^3.10.3",
+    "express": "^4.18.1"
+  },
+  "devDependencies": {
+    "laravel-mix": "^6.0.49"
+  }
+}
