@@ -515,7 +515,7 @@
                
                 <button class="btn-next" @click = "(addCount(), disabledScore = true)" disabled> NEXT</button>
               <button class="btn-reset"
-                    @click="localStorage.removeItem('count');localStorage.removeItem('players');localStorage.removeItem('score');$nextTick(()=>location.reload())"
+                    @click="localStorage.removeItem('count');localStorage.removeItem('players');localStorage.removeItem('score');localStorage.removeItem('hintsList');$nextTick(()=>location.reload())"
               >
                   Reset
               </button>
